@@ -21,8 +21,17 @@ namespace StudentWeb
                
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<StudentWebDbContext>();
-          
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan=TimeSpan.FromMinutes(30);
+                options.SlidingExpiration = true;
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
