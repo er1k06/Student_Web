@@ -28,5 +28,10 @@ namespace StudentWeb.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult Exception(string message)
+        {
+            throw new Exception(message);
+        }
     }
 }
+
